@@ -294,6 +294,28 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -323,10 +345,10 @@
       
         
           
-          ![text][1][1]: 深入iOS事件处理层次及原理分析/1.png
+          Hit-Test找到view的流程
 
-
-          
+触摸事件的整体流程（runloop相关、事件传递和响应）如下图：黑色点view，判断点击区域是不是在所在点bounds范围里面，如果是 -&gt; 遍历黑色view的subViews(反序遍历) -&gt; 粉红色是不是在所在区域，如果是 -&gt; 遍历粉红色
+          ...
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2019/04/16/深入iOS事件处理层次及原理分析/#more" rel="contents">

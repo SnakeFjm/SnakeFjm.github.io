@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="iOS,">
 
 
 
@@ -79,18 +79,24 @@
 
 
 
-<meta name="description" content="![text][1][1]: 深入iOS事件处理层次及原理分析/1.png">
+<meta name="description" content="Hit-Test找到view的流程  触摸事件的整体流程（runloop相关、事件传递和响应）如下图：黑色点view，判断点击区域是不是在所在点bounds范围里面，如果是 -&amp;gt; 遍历黑色view的subViews(反序遍历) -&amp;gt; 粉红色是不是在所在区域，如果是 -&amp;gt; 遍历粉红色view的subViews(反序遍历)此时粉红色没有subViews，那么返回粉红色view   黑">
+<meta name="keywords" content="iOS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="深入iOS事件处理层次及原理分析">
 <meta property="og:url" content="http://yoursite.com/2019/04/16/深入iOS事件处理层次及原理分析/index.html">
 <meta property="og:site_name" content="Snake的博客">
-<meta property="og:description" content="![text][1][1]: 深入iOS事件处理层次及原理分析/1.png">
+<meta property="og:description" content="Hit-Test找到view的流程  触摸事件的整体流程（runloop相关、事件传递和响应）如下图：黑色点view，判断点击区域是不是在所在点bounds范围里面，如果是 -&amp;gt; 遍历黑色view的subViews(反序遍历) -&amp;gt; 粉红色是不是在所在区域，如果是 -&amp;gt; 遍历粉红色view的subViews(反序遍历)此时粉红色没有subViews，那么返回粉红色view   黑">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/04/16/深入iOS事件处理层次及原理分析/1.png">
-<meta property="og:updated_time" content="2019-04-16T13:20:42.848Z">
+<meta property="og:image" content="http://yoursite.com/2019/04/16/深入iOS事件处理层次及原理分析/2.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/16/深入iOS事件处理层次及原理分析/3.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/16/深入iOS事件处理层次及原理分析/4.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/16/深入iOS事件处理层次及原理分析/5.png">
+<meta property="og:image" content="http://yoursite.com/2019/04/16/深入iOS事件处理层次及原理分析/6.png">
+<meta property="og:updated_time" content="2019-04-16T15:11:51.811Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深入iOS事件处理层次及原理分析">
-<meta name="twitter:description" content="![text][1][1]: 深入iOS事件处理层次及原理分析/1.png">
+<meta name="twitter:description" content="Hit-Test找到view的流程  触摸事件的整体流程（runloop相关、事件传递和响应）如下图：黑色点view，判断点击区域是不是在所在点bounds范围里面，如果是 -&amp;gt; 遍历黑色view的subViews(反序遍历) -&amp;gt; 粉红色是不是在所在区域，如果是 -&amp;gt; 遍历粉红色view的subViews(反序遍历)此时粉红色没有subViews，那么返回粉红色view   黑">
 <meta name="twitter:image" content="http://yoursite.com/2019/04/16/深入iOS事件处理层次及原理分析/1.png">
 
 
@@ -294,6 +300,28 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -321,8 +349,64 @@
       
 
       
-        <p>![text][1]<br>[1]: 深入iOS事件处理层次及原理分析/1.png</p>
-<p><img src="/2019/04/16/深入iOS事件处理层次及原理分析/1.png" alt="BP"></p>
+        <p>Hit-Test找到view的流程</p>
+<ul>
+<li>触摸事件的整体流程（runloop相关、事件传递和响应）<br>如下图：<br><img src="/2019/04/16/深入iOS事件处理层次及原理分析/1.png" alt="img"><br><em>黑色点view，判断点击区域是不是在所在点bounds范围里面，<br>如果是 -&gt; 遍历黑色view的subViews(反序遍历) -&gt; 粉红色是不是在所在区域，如果是 -&gt; 遍历粉红色view的subViews(反序遍历)<br>此时粉红色没有subViews，那么返回粉红色view</em></li>
+</ul>
+<hr>
+<p><img src="/2019/04/16/深入iOS事件处理层次及原理分析/2.png" alt="img"><br><em>黑色点view，判断点击区域是不是在所在点bounds范围里面，<br>如果是 -&gt; 遍历黑色view的subViews(反序遍历) -&gt; 粉红色是不是在所在区域，不是 -&gt; 判断是不是在大红色view的区域里 -&gt; 是 -&gt; 遍历大红色view的subViews(反序遍历)<br>此时大红色没有subViews，那么返回大红色view</em></p>
+<hr>
+<p>再来个例子<br><img src="/2019/04/16/深入iOS事件处理层次及原理分析/3.png" alt="img"><br><em>黄色 -&gt; 灰色 -&gt; 蓝色 -&gt; 红色</em></p>
+<hr>
+<p>来个总结<br><img src="/2019/04/16/深入iOS事件处理层次及原理分析/4.png" alt="img"></p>
+<hr>
+<ul>
+<li><p>pointInside 和 hitTest</p>
+<ul>
+<li><p>pointInside：触摸点在不在范围内，不在，则找它兄弟层级，在，则遍历它的子view层级</p>
+</li>
+<li><p>hitTest</p>
+</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>会来调用pointInside</li>
+<li>根据pointInside的值做不同的处理：如果pointInside为YES，那么反序遍历子view，如果pointInside为NO，返回nil</li>
+<li>如果点击区域在自己这里，而不是在子view里，返回的是自己</li>
+<li>如果点击区域在子view里，返回的是子view<br><strong><em>影响Hit-Test流程的因素alpha、hidden、userInteractionEnabled</em></strong></li>
+</ol>
+<hr>
+<ul>
+<li>响应链<br>先上图<br><img src="/2019/04/16/深入iOS事件处理层次及原理分析/5.png" alt="img"></li>
+</ul>
+<hr>
+<p>比如<br><img src="/2019/04/16/深入iOS事件处理层次及原理分析/6.png" alt="img"><br>通过nextResponder来串联响应链：redView -&gt; lightGrayView(superView) -&gt; self.view -&gt; self(viewController) -&gt; view -&gt; superView -&gt; viewController -&gt; window -&gt; application -&gt; appdelegate</p>
+<p><strong><em>注意：scrollView这个控件，它的touch事件是传递不下去的，因为系统会重写它的super touch: </em></strong></p>
+<hr>
+<ul>
+<li>手势和pointInside以及hitTest的关系<ul>
+<li>必须先通过pointInside和hitTest找到view，才可能响应view的手势事件</li>
+<li>通过pointInside和hitTest找到view，那么view和它的superView的手势都能响应，但是如果找到view，不会响应它的子view的手势</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>手势的种类如何分辨<br>通过手势的touch四个方法识别</li>
+</ul>
+<hr>
+<ul>
+<li>手势和view的touch事件的关系<br>默认情况下，如果手势识别出来了，会cancel掉view的touch事件<br>delayTouchBegin、cancelTouchInView</li>
+</ul>
+<hr>
+<ul>
+<li>button的点击和pointInside以及hitTest的关系<br>必须有button的返回，才能响应事件</li>
+</ul>
+<hr>
+<ul>
+<li>button的不同识别<br>也是通过touch四个方法识别</li>
+</ul>
 
       
     </div>
@@ -337,6 +421,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+        </div>
       
 
       
