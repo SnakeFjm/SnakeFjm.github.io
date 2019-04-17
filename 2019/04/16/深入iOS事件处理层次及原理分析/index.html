@@ -93,7 +93,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/04/16/深入iOS事件处理层次及原理分析/4.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/16/深入iOS事件处理层次及原理分析/5.png">
 <meta property="og:image" content="http://yoursite.com/2019/04/16/深入iOS事件处理层次及原理分析/6.png">
-<meta property="og:updated_time" content="2019-04-16T15:11:51.811Z">
+<meta property="og:updated_time" content="2019-04-17T14:06:06.907Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深入iOS事件处理层次及原理分析">
 <meta name="twitter:description" content="Hit-Test找到view的流程  触摸事件的整体流程（runloop相关、事件传递和响应）如下图：黑色点view，判断点击区域是不是在所在点bounds范围里面，如果是 -&amp;gt; 遍历黑色view的subViews(反序遍历) -&amp;gt; 粉红色是不是在所在区域，如果是 -&amp;gt; 遍历粉红色view的subViews(反序遍历)此时粉红色没有subViews，那么返回粉红色view   黑">
@@ -407,6 +407,13 @@
 <ul>
 <li>button的不同识别<br>也是通过touch四个方法识别</li>
 </ul>
+<hr>
+<ul>
+<li>多手势存在互斥和共存的问题<br>如果hitTest和pointInside找到了这个view，那么view或者父view上的手势都会响应</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">// 手势已经识别，通过这个方法的返回值，看是否响应</span><br><span class="line">- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer &#123;</span><br><span class="line">	return YES;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 两个手势是否共存（一起响应），A手势和B手势，只要这两个手势有一个手势的这个代理方法返回的YES，那么就是共存</span><br><span class="line">- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer &#123;</span><br><span class="line">	return NO;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 互斥用的：gestureRecognizer它要响应，必须得满足otherGestureRecognizer响应失败，才可以，otherGestureRecognizer的优先级最高</span><br><span class="line">- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRequireFailureOfGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer &#123;</span><br><span class="line">	return NO;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 互斥用的：otherGestureRecognizer它要响应，需要gestureRecognizer响应失败，才可以，gestureRecognizer的优先级最高</span><br><span class="line">- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldBeRequiredToFailByGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer &#123;</span><br><span class="line">	return YES;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//手势支不支持touch</span><br><span class="line">- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch &#123;</span><br><span class="line">	return YES;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<p>如何滑动scrollView上的子view而不滑动scrollView？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">self.scrollView.delaysContentTouches = NO;</span><br><span class="line">self.scrollView.canCancelContentTouches = NO;</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
