@@ -79,18 +79,21 @@
 
 
 
-<meta name="description" content="性能优化 Instruments使用 打开instrument的各种方式 Profile xcode-&amp;gt;open develop tools xcode debug navigator deck上打开 comand+option拖入Applications目录加入Launchpad中 命令行 open /Applications/Xcode.app/Contents/Applications">
+<meta name="description" content="高级动画  UIView和CALayer   UIView继承于UIResponder, NSObjectCALayer继承于NSObjectUIView响应事件、管理CALayer, UIView有layer、sublayerCALayer显示内容   position和anchorPoint anchorPoint是锚点,它的值范围为(0~1)，是相对layer本身点坐标。 view的旋转会围">
 <meta name="keywords" content="iOS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="性能优化">
-<meta property="og:url" content="http://yoursite.com/2019/08/09/性能优化/index.html">
+<meta property="og:title" content="高级动画">
+<meta property="og:url" content="http://yoursite.com/2019/08/18/高级动画/index.html">
 <meta property="og:site_name" content="Snake的博客">
-<meta property="og:description" content="性能优化 Instruments使用 打开instrument的各种方式 Profile xcode-&amp;gt;open develop tools xcode debug navigator deck上打开 comand+option拖入Applications目录加入Launchpad中 命令行 open /Applications/Xcode.app/Contents/Applications">
+<meta property="og:description" content="高级动画  UIView和CALayer   UIView继承于UIResponder, NSObjectCALayer继承于NSObjectUIView响应事件、管理CALayer, UIView有layer、sublayerCALayer显示内容   position和anchorPoint anchorPoint是锚点,它的值范围为(0~1)，是相对layer本身点坐标。 view的旋转会围">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-09T12:11:06.944Z">
+<meta property="og:image" content="http://yoursite.com/2019/08/18/高级动画/1.png">
+<meta property="og:image" content="http://yoursite.com/2019/08/18/高级动画/2.png">
+<meta property="og:updated_time" content="2019-08-18T04:53:13.112Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="性能优化">
-<meta name="twitter:description" content="性能优化 Instruments使用 打开instrument的各种方式 Profile xcode-&amp;gt;open develop tools xcode debug navigator deck上打开 comand+option拖入Applications目录加入Launchpad中 命令行 open /Applications/Xcode.app/Contents/Applications">
+<meta name="twitter:title" content="高级动画">
+<meta name="twitter:description" content="高级动画  UIView和CALayer   UIView继承于UIResponder, NSObjectCALayer继承于NSObjectUIView响应事件、管理CALayer, UIView有layer、sublayerCALayer显示内容   position和anchorPoint anchorPoint是锚点,它的值范围为(0~1)，是相对layer本身点坐标。 view的旋转会围">
+<meta name="twitter:image" content="http://yoursite.com/2019/08/18/高级动画/1.png">
 
 
 
@@ -120,13 +123,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/08/09/性能优化/">
+  <link rel="canonical" href="http://yoursite.com/2019/08/18/高级动画/">
 
 
 
 
 
-  <title>性能优化 | Snake的博客</title>
+  <title>高级动画 | Snake的博客</title>
   
 
 
@@ -253,7 +256,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/09/性能优化/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/18/高级动画/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Snake">
@@ -270,7 +273,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">性能优化</h1>
+          <h1 class="post-title" itemprop="name headline">高级动画</h1>
         
 
         <div class="post-meta">
@@ -282,8 +285,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-09T20:07:40+08:00">
-                2019-08-09
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-18T12:51:36+08:00">
+                2019-08-18
               </time>
             
 
@@ -342,103 +345,83 @@
       
 
       
-        <h1 id="性能优化"><a href="#性能优化" class="headerlink" title="性能优化"></a>性能优化</h1><ul>
-<li>Instruments使用<ul>
-<li>打开instrument的各种方式<ol>
-<li>Profile</li>
-<li>xcode-&gt;open develop tools</li>
-<li>xcode debug navigator</li>
-<li>deck上打开</li>
-<li>comand+option拖入Applications目录加入Launchpad中</li>
-<li>命令行 open /Applications/Xcode.app/Contents/Applications/Instruments.app</li>
+        <h1 id="高级动画"><a href="#高级动画" class="headerlink" title="高级动画"></a>高级动画</h1><p><img src="/2019/08/18/高级动画/1.png" alt="img"></p>
+<ul>
+<li>UIView和CALayer</li>
+</ul>
+<p><img src="/2019/08/18/高级动画/2.png" alt="img"></p>
+<p>UIView继承于UIResponder, NSObject<br>CALayer继承于NSObject<br>UIView响应事件、管理CALayer, UIView有layer、sublayer<br>CALayer显示内容</p>
+<hr>
+<ul>
+<li>position和anchorPoint<ol>
+<li>anchorPoint是锚点,它的值范围为(0~1)，是相对layer本身点坐标。</li>
+<li>view的旋转会围绕着anchorPoint来旋转</li>
+<li>position是layer层相对父层点坐标,position和anchorPoint实际指的是同一个点 </li>
+<li>position和anchorPoint的改变,对另一个值没影响</li>
+<li>anchorPoint值的修改,可以改变view的布局</li>
 </ol>
 </li>
 </ul>
+<p><strong><em>总结:知道position的值,把锚点这个点和position对齐,就是view的布局</em></strong></p>
+<hr>
+<ul>
+<li>推导frame的计算公式(不包含旋转角度)<ul>
+<li>frame.origin.x = position.x - anchorPoint.x * width</li>
+<li>frame.origin.y = position.y - anchorPoint.y * height</li>
+<li>frame.width</li>
+<li>frame.height</li>
+</ul>
 </li>
 </ul>
 <hr>
 <ul>
-<li>CPU监测<br>Measure CPU Use<br>监测CPU核与线程情况 Time Profiler<br>CPU使用策略视图查看CPU核心使用情况，平衡使用最好<br>线程使用策略视图，查看主线程任务是否过多</li>
-</ul>
-<hr>
+<li><p>view.layer的代理方法</p>
 <ul>
-<li>Counter工具<br>查看App的可能的性能瓶颈<br>Performance monitor counters (PMCs) 即Counter工具<br>衡量处理器发生的事件个数</li>
+<li>displayLayer</li>
+<li>drawLayer: inContext:</li>
 </ul>
-<hr>
-<ul>
-<li>图像性能<br>减少view个数 ，例如聊天的图文混排，使用富文本代替labelss，imageviews<br>减少使用半透明效果，或者不要把半透明加在一个经常变化的view之上，因为，不仅底层view要更新，半透明的也要更新。<br>shouldRasterize(栅格化) == true，将当前view绘制成image缓存，这个绘制过程本身比较耗时耗内存，但是如果界面很少变化，这种缓存能提升性能。<br>使用needsToDrawRect: 或 getRectsBeingDrawn:count:并将结果传给drawRect: (NSView)<br>其他下一页</li>
-</ul>
-<hr>
-<ul>
-<li>图像性能监测<br>Core Animation工具<br>Blended像素混合<br>Color Copied images 图片能否需CPU要转码，需要的蓝色<br>Misaligned图像无法重合<br>Offscreen-Rendered工具<br>Color Hits Green and Misses Red 检测栅格化的效果，绿色最佳</li>
-</ul>
-<hr>
-<ul>
-<li>Blended像素混合<br>当图层有半透明时，如：view.backgroundcolor。<br>GPU需要进行像素混合，需要先绘制透明层下层的内容，再叠加透明层以达到透明的效果，而不影响帧率的情况下，GPU可绘制的像素是有限制的。<br>通常优化方式<br>backgroundColor设置为不透明色<br>Opaque设置为YES<br>图片能不用透明的切图成不透明</li>
-</ul>
-<hr>
-<ul>
-<li>Color Copied images<br>由Core animation拷贝的图片标记为蓝色<br>如果图片格式GPU不能直接绘制，则会交给CPU先转码处理</li>
-</ul>
-<hr>
-<ul>
-<li><p>Misaligned图像无法重合<br>Misaligned Image表示要绘制的图像无法直接映射到屏幕上。<br>此时系统需要进行缩放，抗锯齿等操作，增加了图形负担，通常这种问题出在对某些View的Frame重新计算和设置时产生的。</p>
 </li>
-<li><p>Offscreen-Rendered检测<br>离屏渲染（CPU）<br>drawRect UIGraphicGetCurrentContext()<br>使用Core Graphics  CreateBitMapContext()<br>以上两种情况都会开辟一个CGContext，分配一块内存空间，用于离屏渲染。<br>离屏渲染（GPU）<br>设置cornerRadius, masks, shadows,edge antialiasing等<br>设置layer.shouldRasterize ＝ YES，用在view界面后续没有变化。</p>
+<li><p>layer层隐式动画</p>
 </li>
-</ul>
-<p>Onscreen 缓冲区。</p>
-<hr>
-<ul>
-<li>Color Hits Green and Misses Red<br>由于Shadow、Mask和Gradient等原因渲染很高，通常通过设置shouldRasterize栅格化属性为YES，缓存渲染内容。<br>命中缓存image，显示绿色，未命中，显示红色。</li>
+<li>view没有隐式动画</li>
 </ul>
 <hr>
 <ul>
-<li>Allocations<br>内存分配情况查看工具，可以查看每一个对象所占用的内存大小<br>方便定位内存消耗在哪些对象上。</li>
-</ul>
-<hr>
-<ul>
-<li>其他工具<br>Activity monitor<br>一款ios活动监视器，能看到每一个应用所占用的系统资源情况,如：使用线程数，使用CPU时长，实际使用内存大小等。<br>System trace工具</li>
-</ul>
-<p>Memory Usage</p>
-<hr>
-<ul>
-<li>Timer工具<br>使用timer工具来对比一下autolayout与使用frame布局</li>
-</ul>
-<hr>
-<ul>
-<li>图片预加载<br>项目中的图片，加载时入：UIImage imageNamed:，initWithContentOfFile等，需要从文件中读取，耗时较长，建议放到后台线程。</li>
-</ul>
-<hr>
-<ul>
-<li>图片解压<ol>
-<li>jpeg，png等压缩格式图片，GPU不能直接绘制，建议先后台解压(SDWebImageDecoder)</li>
-<li>聊天表情等图文混排使用Coretext方式后台解压为bitmap图片，减少UI元素数量</li>
+<li>动画的流程<ol>
+<li>有delegate，执行delegate</li>
+<li>没有的话寻找actions里的action</li>
+<li>然后再寻找style里的action:defaultActionForKey</li>
+<li>调用actionForKey</li>
+<li>如果有action返回，那么执行addAnimationForKey方法<br>上述流程，如果返回为nil，继续走流程，为NSNull null就停止</li>
 </ol>
 </li>
 </ul>
 <hr>
 <ul>
-<li>TableView复用cell复用对应的是什么设计模式，原理<br>享元模式<br>采用一个共享来避免大量拥有相同内容对象的开销，公共对象池，共享以节约资源</li>
+<li>layer层三层树结构<ul>
+<li>presentationLayer Tree（呈现树） 用来展示的</li>
+<li>modelLayer Tree（模型树） 来存储数据和值的</li>
+<li>Render Tree（渲染树）</li>
+</ul>
+</li>
+</ul>
+<p>动画的时候是对presentLayer操作，modelLayer还是保持原来的值</p>
+<p> 模型树：是用来存储数据的、响应事件<br> 呈现树：用来根据模型树的数据，展示<br> 呈现树是对模型树的copy</p>
+<p>如果说：你添加了一个动画，那么此时呈现树的数据来自于动画，而不是模型树；当动画结束之后，才又会根据模型树的数据展示；如果动画结束了，但是动画不移除，那么呈现树的数据依然来自于动画</p>
+<p> 引申：每一个runloop循环的时候，会提交一个事务：CATransaction，让呈现树根据数据展示</p>
+<hr>
+<ul>
+<li>动画代理<br>代理里面的animOne是animation的深拷贝，不是同一个地址的动画对象</li>
 </ul>
 <hr>
 <ul>
-<li>tableView刷新优化<br>目的： 减少不必要的刷新，减轻主线程任务<br>解决办法：<ol>
-<li>监听Runloop，在runloop空闲时刷新</li>
-<li>使用队列，缓存一定时间内（如0.05秒）发生改变的行，一次性刷新<br>C语言线程，如果代码执行完了，线程就结束<br>While(condition) {   //循环到十秒钟后  condition = 0;}</li>
+<li>贝塞尔曲线<ul>
+<li>shapelayer.fillRule:<ol>
+<li>kCAFillRuleEvenOdd 字面意思是“奇偶”。按该规则，要判断一个点是否在图形内，从该点作任意方向的一条射线，然后检测射线与图形路径的交点的数量。如果结果是奇数则认为点在内部，是偶数则认为点在外部</li>
+<li>kCAFillRulenonzero 字面意思是“非零”。按该规则，要判断一个点是否在图形内，从该点作任意方向的一条射线，然后检测射线与图形路径的交点情况。从0开始计数，路径从左向右穿过射线则计数加1，从右向左穿过射线则计数减1。得出计数结果后，如果结果是0，则认为点在图形外部，否则认为在内部</li>
 </ol>
 </li>
 </ul>
-<hr>
-<ul>
-<li>图片缓存流程<ol>
-<li>URL合法性判断</li>
-<li>Cache中查找图片</li>
-<li>磁盘上查找图片</li>
-<li>判断是否达到最下载数</li>
-<li>下载</li>
-<li>下载完成判断是否有下一个下载，有就开启</li>
-</ol>
 </li>
 </ul>
 <hr>
@@ -472,8 +455,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/08/Block/" rel="next" title="Block">
-                <i class="fa fa-chevron-left"></i> Block
+              <a href="/2019/08/09/性能优化/" rel="next" title="性能优化">
+                <i class="fa fa-chevron-left"></i> 性能优化
               </a>
             
           </div>
@@ -481,10 +464,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/08/18/高级动画/" rel="prev" title="高级动画">
-                高级动画 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -634,7 +613,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#性能优化"><span class="nav-number">1.</span> <span class="nav-text">性能优化</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#高级动画"><span class="nav-number">1.</span> <span class="nav-text">高级动画</span></a></li></ol></div>
             
 
           </div>
